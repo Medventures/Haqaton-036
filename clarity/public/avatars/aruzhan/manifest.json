@@ -1,0 +1,95 @@
+{
+  "width": 720,
+  "height": 900,
+  "base": "base.webp",
+  "baseSmall": "base-sm.webp",
+  "mouth": {
+    "x": 246,
+    "y": 350,
+    "w": 172,
+    "h": 124,
+    "frames": {
+      "A": "mouth-a.webp",
+      "O": "mouth-o.webp",
+      "E": "mouth-e.webp",
+      "U": "mouth-u.webp",
+      "M": "mouth-m.webp"
+    }
+  },
+  "eyes": {
+    "x": 234,
+    "y": 236,
+    "w": 192,
+    "h": 56,
+    "src": "eyes-closed.webp"
+  },
+  "face": {
+    "cx": 332,
+    "cy": 330,
+    "size": 330
+  },
+  "rig": {
+    "_comment": "Ориентиры рта на base.webp (720×900) для непрерывной деформации (src/voice/mouthRig.ts). Измерены scripts/avatar/warp-preview.mts --measure.",
+    "cx": 332,
+    "seam": [
+      [
+        280,
+        395.5
+      ],
+      [
+        288,
+        397.5
+      ],
+      [
+        294,
+        399.5
+      ],
+      [
+        300,
+        400.5
+      ],
+      [
+        312,
+        401.5
+      ],
+      [
+        324,
+        403.5
+      ],
+      [
+        336,
+        402.5
+      ],
+      [
+        348,
+        401.5
+      ],
+      [
+        360,
+        401.5
+      ],
+      [
+        372,
+        399.5
+      ],
+      [
+        378,
+        397.5
+      ],
+      [
+        386,
+        395.5
+      ]
+    ],
+    "upperLipTop": 389,
+    "lowerLipBottom": 428,
+    "chin": 484,
+    "chinCurve": 16,
+    "box": {
+      "x": 240,
+      "y": 368,
+      "w": 184,
+      "h": 146
+    }
+  }
+}

@@ -1,0 +1,19 @@
+/* staff-v4 — стили этой части интерфейса */
+
+/* Переключатель языка в тёмной боковой панели кабинета */
+.sside-lang { display: flex; justify-content: flex-start; padding: 0 .2rem; }
+.sside-lang .lang-switch { width: 100%; }
+.sside-lang .lang-switch button { flex: 1; }
+
+/* Пометка «клинические записи на русском» в карточке пациента (казахский интерфейс) */
+.staff-lang-note { display: flex; align-items: center; gap: .4rem; margin: 0 0 .25rem; padding: .45rem .7rem; border-radius: 10px; background: var(--line-2, #eef3f2); color: var(--muted); font-size: .82rem; }
+.staff-lang-note svg { flex: none; color: var(--teal, #0b7a70); }
+
+/* Единица «на визит» рядом со значением метрики */
+.kpi-value .kpi-unit { font-size: .45em; font-weight: 600; color: var(--muted); letter-spacing: 0; }
+.tbl td b + small { display: block; }
+
+@media (max-width: 960px) {
+  .sside-lang { padding: 0; flex: none; }
+  .sside-lang .lang-switch { width: auto; }
+}

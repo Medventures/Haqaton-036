@@ -1,0 +1,43 @@
+{
+  "name": "clarity-diagnostic-companion",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c cyan,magenta \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:api": "API_PORT=8787 tsx watch server/index.ts",
+    "dev:web": "vite --host 0.0.0.0",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "build": "vite build",
+    "start": "NODE_ENV=production tsx server/index.ts",
+    "preview": "vite preview --host 0.0.0.0",
+    "docker:up": "docker compose up --build",
+    "docker:down": "docker compose down"
+  },
+  "dependencies": {
+    "@fastify/static": "^10.1.5",
+    "@vitejs/plugin-react": "4.7.0",
+    "fastify": "^5.12.5",
+    "lucide-react": "0.468.0",
+    "pdfjs-dist": "^4.10.38",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "sherpa-onnx-node": "^1.13.8",
+    "tsx": "^4.23.15",
+    "typescript": "5.9.3",
+    "vite": "^6.4.3",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "concurrently": "^9.2.4",
+    "sharp": "^0.35.5",
+    "vitest": "^4.1.11"
+  },
+  "engines": {
+    "node": ">=20.6"
+  }
+}

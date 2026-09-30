@@ -1,0 +1,8 @@
+{$DOMAIN} {
+	encode zstd gzip
+	# Загрузка фото документов до ~12 МБ
+	request_body {
+		max_size 16MB
+	}
+	reverse_proxy clarity:8787
+}

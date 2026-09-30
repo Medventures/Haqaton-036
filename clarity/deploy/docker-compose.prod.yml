@@ -1,0 +1,43 @@
+# Продакшен на VPS: приложение + Caddy (автоматический HTTPS от Let's Encrypt).
+# Запуск на сервере из корня репозитория:
+#   DOMAIN=clarity.example.kz docker compose -f deploy/docker-compose.prod.yml up -d --build
+# Без своего домена можно использовать <IP>.sslip.io (например 203.0.113.10.sslip.io).
+services:
+  clarity:
+    build:
+      context: ..
+    restart: unless-stopped
+    env_file:
+      - path: ../.env
+        required: false
+    environment:
+      HOST: 0.0.0.0
+      PORT: 8787
+      API_PORT: 8787
+      DATA_FILE: /data/db.json
+      PUBLIC_URL: https://${DOMAIN:?Укажите DOMAIN}
+    volumes:
+      - clarity-data:/data
+    expose:
+      - "8787"
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    depends_on:
+      - clarity
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      DOMAIN: ${DOMAIN}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+
+volumes:
+  clarity-data:
+  caddy-data:
+  caddy-config:

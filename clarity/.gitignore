@@ -1,0 +1,41 @@
+# Dependencies and build output
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Local/editor/OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.example.json
+
+# Logs and temporary files
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+*.log
+work/
+outputs/
+
+# Server data (synthetic demo DB)
+server/data/
+
+# Local tool config
+.claude/
+
+# Voice models (downloaded by scripts/download-voices.mjs)
+server/models/
+# Avatar generation working files
+scripts/avatar/out/

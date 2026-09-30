@@ -1,0 +1,8 @@
+/* Переключатель языка */
+.lang-switch { display: inline-flex; padding: .2rem; border-radius: 12px; background: var(--line-2); gap: .15rem; }
+.lang-switch button { border: 0; background: none; padding: .45rem .75rem; border-radius: 9px; font-weight: 700; font-size: .9rem; color: var(--ink-2); min-height: 2.3rem; }
+.lang-switch button.on { background: #fff; color: var(--teal-600); box-shadow: var(--shadow); }
+.lang-switch.compact button { padding: .35rem .55rem; font-size: .8rem; min-height: 2rem; }
+.lang-switch.on-dark { background: rgba(255,255,255,.14); }
+.lang-switch.on-dark button { color: rgba(255,255,255,.85); }
+.lang-switch.on-dark button.on { background: #fff; color: var(--teal-600); }

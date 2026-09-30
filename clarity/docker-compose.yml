@@ -1,0 +1,37 @@
+# Clarity одной командой:  docker compose up --build   →   http://localhost:8787
+# Требуется Docker Compose ≥ 2.24 (необязательный env_file). Подробно: docs/DOCKER.md
+#
+# Настройки берутся из .env, если он есть (LLM_API_KEY, GOOGLE_*, STAFF_TOKEN, DEMO_LOGIN …).
+# Без .env приложение работает в режиме правил (без LLM) с демо-входом.
+#
+# Переменные только для Docker (задаются в .env или в оболочке):
+#   CLARITY_PORT        порт на хосте                      (по умолчанию 8787)
+#   CLARITY_BIND        адрес на хосте; 0.0.0.0 — открыть в локальную сеть (по умолчанию 127.0.0.1)
+#   CLARITY_PUBLIC_URL  публичный адрес приложения (redirect URI Google, флаг Secure у cookie)
+#                       (по умолчанию http://localhost:8787; PUBLIC_URL из .env — это адрес dev-сервера vite)
+
+services:
+  clarity:
+    build:
+      context: .
+    init: true
+    restart: unless-stopped
+    ports:
+      - "${CLARITY_BIND:-127.0.0.1}:${CLARITY_PORT:-8787}:8787"
+    env_file:
+      - path: .env
+        required: false
+    # Перекрывает значения из .env: в .env лежат настройки для локальной разработки
+    # (HOST=127.0.0.1 сделал бы контейнер недоступным снаружи).
+    environment:
+      HOST: 0.0.0.0
+      PORT: "8787"
+      API_PORT: "8787"
+      PUBLIC_URL: ${CLARITY_PUBLIC_URL:-http://localhost:8787}
+      DATA_FILE: /data/db.json
+      VOICES_DIR: /app/server/models/tts
+    volumes:
+      - clarity-data:/data
+
+volumes:
+  clarity-data:

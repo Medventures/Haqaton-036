@@ -1,0 +1,40 @@
+/* Казахский орнамент (ою-өрнек) — токены и утилиты для компонентов src/brand/Ornament.tsx.
+   Компоненты рисуют currentColor; цвет задаётся классом-модификатором или пропом color. */
+:root {
+  --kz-gold: #C9A23A;
+  --kz-gold-soft: #E7C86A;
+  --kz-sky: #00A3C4;
+}
+
+/* Базовые классы (компоненты добавляют их сами) */
+.kz-band { display: block; width: 100%; opacity: 0.55; pointer-events: none; }
+.kz-pattern { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.1; pointer-events: none; z-index: 0; }
+.kz-corner { position: absolute; display: block; opacity: 0.6; pointer-events: none; }
+.kz-corner-tl { top: 8px; left: 8px; }
+.kz-corner-tr { top: 8px; right: 8px; }
+.kz-corner-bl { bottom: 8px; left: 8px; }
+.kz-corner-br { bottom: 8px; right: 8px; }
+.kz-rosette { display: block; pointer-events: none; }
+.kz-divider { display: flex; align-items: center; gap: 8px; width: 100%; max-width: 360px; margin: 12px auto; opacity: 0.7; pointer-events: none; }
+.kz-divider > svg { flex: none; }
+.kz-divider-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, currentColor); }
+.kz-divider-line:last-child { background: linear-gradient(to left, transparent, currentColor); }
+
+/* Цвета */
+.kz-gold { color: var(--kz-gold); }
+.kz-teal { color: var(--teal, #0b7a70); }
+.kz-sky { color: var(--kz-sky); }
+
+/* На тёмном бирюзовом фоне (голосовой звонок, вход) — мягкое золото чуть ярче */
+.kz-on-dark { color: var(--kz-gold-soft); }
+.kz-band.kz-on-dark { opacity: 0.75; }
+.kz-corner.kz-on-dark { opacity: 0.8; }
+.kz-divider.kz-on-dark { opacity: 0.85; }
+.kz-pattern.kz-on-dark { opacity: 0.14; }
+
+@media (prefers-reduced-transparency: reduce) {
+  .kz-pattern { display: none; }
+}
+@media print {
+  .kz-pattern, .kz-corner { display: none; }
+}

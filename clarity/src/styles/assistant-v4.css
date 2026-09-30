@@ -1,0 +1,80 @@
+/* assistant-v4 — стили этой части интерфейса: чат-панель, голосовой звонок, карточки (v4: ru/kk, Аружан, орнамент) */
+
+/* ---------- Чат-панель ---------- */
+.as-head { gap: .55rem; }
+.as-head-avatar { flex: none; }
+.assistant.av-aruzhan .as-head-avatar { width: 56px; height: 56px; border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px rgba(201,162,58,.55), 0 4px 14px rgba(12,42,44,.18); }
+.as-who { display: grid; justify-items: start; gap: .15rem; }
+.as-who b { line-height: 1.15; }
+.as-who .ai-badge { font-size: .62rem; padding: .16rem .45rem; letter-spacing: .03em; }
+.as-tools { align-items: center; flex-wrap: nowrap; }
+/* Переключатель языка внутри панели инструментов не должен наследовать квадратные кнопки */
+.as-tools .lang-switch button { width: auto; height: auto; border: 0; border-radius: 8px; background: none; display: inline-block; }
+.as-tools .lang-switch button.on { background: #fff; }
+.as-tools .lang-switch.compact button { padding: .3rem .45rem; font-size: .74rem; min-height: 1.9rem; }
+.as-legal { text-wrap: pretty; }
+@media (max-width: 420px) {
+  .as-head { padding: .6rem .6rem; gap: .4rem; }
+  .as-tools { gap: .18rem; }
+  .as-tools button { width: 2.2rem; height: 2.2rem; }
+  .as-tools .lang-switch.compact button { padding: .28rem .35rem; font-size: .7rem; }
+  .as-who .ai-badge { font-size: .58rem; }
+}
+
+/* ---------- Голосовой звонок ---------- */
+.call.call-v4 { isolation: isolate; }
+.call-v4 > .call-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.call-v4 > .call-bg::after { content: ''; position: absolute; inset: 0; background: radial-gradient(60% 45% at 50% 32%, rgba(27,111,138,.0) 0%, rgba(6,41,47,.55) 100%); }
+.call-v4 > .call-band { align-self: stretch; margin: -1rem -1rem .55rem; height: 14px; overflow: hidden; pointer-events: none; opacity: .9; }
+.call-v4 > .call-band > * { display: block; width: 100%; height: 100%; }
+.call-v4 > *:not(.call-bg) { position: relative; z-index: 1; }
+.call-top-tools { display: flex; align-items: center; gap: .5rem; }
+
+/* Сцена и портрет */
+.call-v4 .call-stage { margin-top: .6rem; }
+.call-portrait { position: relative; z-index: 1; display: grid; place-items: center; max-width: calc(100vw - 2.5rem); }
+.call-portrait .call-avatar { position: relative; z-index: 1; display: block; width: 100%; cursor: default; }
+.phase-speaking .call-portrait .call-avatar, .phase-paused .call-portrait .call-avatar { cursor: pointer; }
+
+/* Аружан — фотопортрет в карточке со скруглёнными углами и мягким свечением */
+.av-aruzhan .call-rings { display: none; }
+.av-aruzhan .call-portrait .call-avatar { border-radius: 28px; overflow: hidden; background: #0f5663; border: 1px solid rgba(255,255,255,.22); box-shadow: 0 24px 60px rgba(0,0,0,.35), 0 0 0 6px rgba(255,255,255,.04); }
+.av-aruzhan .call-portrait .call-avatar > * { width: 100% !important; max-width: 100%; }
+.av-aruzhan .call-glow { position: absolute; inset: -14px; z-index: 0; border-radius: 40px; pointer-events: none;
+  background: conic-gradient(from 0deg, rgba(143,220,255,.0), rgba(143,220,255,.55), rgba(231,200,106,.45), rgba(127,240,200,.5), rgba(143,220,255,.0));
+  filter: blur(18px); opacity: .35; transition: opacity .4s ease; }
+.av-aruzhan.phase-speaking .call-glow { opacity: .85; animation: call-glow-pulse 1.8s ease-in-out infinite, call-glow-spin 9s linear infinite; }
+.av-aruzhan.phase-listening .call-glow { opacity: .9; background: conic-gradient(from 0deg, rgba(127,240,200,.1), rgba(127,240,200,.75), rgba(143,220,255,.4), rgba(127,240,200,.1)); animation: call-glow-pulse 1.2s ease-in-out infinite, call-glow-spin 6s linear infinite; }
+.av-aruzhan.phase-thinking .call-glow { opacity: .7; background: conic-gradient(from 0deg, rgba(242,193,78,.05), rgba(242,193,78,.7), rgba(231,200,106,.2), rgba(242,193,78,.05)); animation: call-glow-spin 2.4s linear infinite; }
+.av-aruzhan.phase-paused .call-glow, .av-aruzhan.phase-unsupported .call-glow { opacity: .15; }
+@keyframes call-glow-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.035); } }
+@keyframes call-glow-spin { to { rotate: 360deg; } }
+.av-aruzhan .call-status { position: relative; z-index: 2; margin-top: -1.15rem; background: rgba(8,52,60,.82); border: 1px solid rgba(255,255,255,.18); backdrop-filter: blur(6px); }
+
+/* Клэри — робот без карточки: прежние кольца */
+.av-clary .call-glow { display: none; }
+.av-clary .call-portrait .call-avatar { border-radius: 50%; }
+.av-clary .call-portrait .clary-avatar { width: 100%; height: auto; }
+
+/* Экран согласия */
+.call-v4 .call-consent { gap: .7rem; }
+.call-consent-avatar { display: grid; place-items: center; }
+.av-aruzhan .call-consent-avatar > * { border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 3px rgba(255,255,255,.18), 0 0 0 7px rgba(201,162,58,.35), 0 18px 40px rgba(0,0,0,.35); }
+.call-consent .ai-badge { justify-self: center; }
+.call-consent-lang { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: .6rem; color: rgba(255,255,255,.8); font-size: .92rem; font-weight: 600; }
+
+.call-v4 .call-caption { text-wrap: pretty; }
+.call-v4 .call-controls .round span { max-width: 6.5rem; text-align: center; line-height: 1.2; }
+
+@media (max-width: 640px) {
+  .call-v4 .call-stage .clary-avatar { width: 100%; }
+  .call-top-tools { gap: .35rem; }
+  .call-v4 .call-top .ai-badge { font-size: .64rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .call-glow { animation: none !important; }
+}
+
+/* ---------- Карточки ---------- */
+.c-card .c-status { text-wrap: pretty; }
+.c-phase-label { text-wrap: balance; }

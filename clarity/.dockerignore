@@ -1,0 +1,44 @@
+# Контекст сборки Docker. Всё, что не нужно образу, — сюда: меньше контекст и реже
+# инвалидируется слой `COPY . .` (сборка фронтенда).
+
+# Зависимости и артефакты — ставятся/собираются внутри образа
+node_modules
+dist
+coverage
+*.tsbuildinfo
+*.log
+
+# Секреты и локальные данные — никогда не попадают в образ (.env читает compose при запуске)
+.env
+.env.*
+!.env.example
+**/*.pem
+**/*.key
+**/*.p12
+**/*.pfx
+server/data
+
+# Голоса приходят из стадии voices (scripts/download-voices.mjs), не с диска разработчика
+server/models
+
+# Рабочие файлы генерации аватара
+scripts/avatar/out
+work
+outputs
+
+# VCS, инструменты, ОС
+.git
+.github
+.claude
+.vscode
+.idea
+**/.DS_Store
+Thumbs.db
+
+# Docker-файлы и документация не участвуют в сборке (правка не пересобирает фронтенд)
+Dockerfile
+docker-compose.yml
+.dockerignore
+docs
+assets
+*.md
